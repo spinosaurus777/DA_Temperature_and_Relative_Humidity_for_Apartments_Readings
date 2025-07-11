@@ -485,3 +485,10 @@ print(df_merged_7102.dtypes)
 make_humidity_graph(df_merged_7102, "7-102", [20252, 20254.99999999999], 3.9)
 
 #(20258.365486111114, 20258.970486111113)
+
+
+#%%
+
+print("Hello world!")
+
+
