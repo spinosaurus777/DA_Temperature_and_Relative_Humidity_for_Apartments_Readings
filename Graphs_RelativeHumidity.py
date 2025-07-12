@@ -490,5 +490,6 @@ make_humidity_graph(df_merged_7102, "7-102", [20252, 20254.99999999999], 3.9)
 #%%
 
 print("Hello world!")
+print("Oscar Daniel")
 
 
