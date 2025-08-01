@@ -6,7 +6,7 @@ each of them as well as graph containing all the data.
 
 This repository does not include the databases nor the sources of them. While I would like 
 to share the complete project, it involves sensible data that I am
-not allowed to share. However, with the adducate permission,I have included two result 
+not allowed to share. However, with the adequate permission, I have included two results 
 graphs as an example.
 
 # Lbraries used
