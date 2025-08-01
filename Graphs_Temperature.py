@@ -2,7 +2,7 @@
 """
 Created on Sun Jul  6 18:34:28 2025
 
-@author: carol
+@author: spinosaurus777
 """
 
 # Import libraries
@@ -313,25 +313,6 @@ def process_CBE_data(temp_path:str)-> pd.DataFrame:
     
     return df_temp
 
-    
-    
-    
-    
-#%%
-# Main
 
-# CBE Data
-temp_path=os.path.join(os.getcwd(), "Mediciones_Temperatura.xlsx")
-df=process_CBE_data(temp_path)
-
-#%%
-
-apto="4-501"
-df_apto=process_APTO_data(apto)
-merged_path=os.path.join(os.getcwd(),"Merged_Data_Temperature",f"Merged_{apto}.xlsx")
-df_merged=merge_CBE_APTO_data(df_apto, df, merged_path)
-
-
-make_temperature_graph(df_merged, apto)
 
 
