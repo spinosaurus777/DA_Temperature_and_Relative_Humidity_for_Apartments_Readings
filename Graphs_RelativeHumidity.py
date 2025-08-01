@@ -2,14 +2,13 @@
 """
 Created on Thu Jul  3 15:28:08 2025
 
-@author: carol
+@author: spinosaurus777
 """
 # Import libraries
 
 # For data processing
 import pandas as pd
 import numpy as np
-import regex as re
 import os
 
 # For data visualization
@@ -20,7 +19,6 @@ import matplotlib.dates as mdates
 
 # Check for correct importation
 print ('Matplotlib version: ', mpl.__version__) 
-print('Regex version: ', re.__version__)
 print ('Numpy version: ', np.__version__)
 print ('Pandas version: ', pd.__version__)  
 
@@ -51,22 +49,19 @@ def process_IDEAM_data(ideam_path:str, **kwargs) -> pd.DataFrame:
     """
     
     # Print the current workind directory and IDEAM data path.
-    current_path=os.getcwd()
-    print("El directorio actual es: ", current_path)
-    print("La ruta del archivo a IDEAM leer es:", ideam_path)
+    current_path = os.getcwd()
+    print("The current direcotry is: ", current_path)
+    print("The route for the IDEAM files is:", ideam_path)
     
     # Read and load data
     # IDEAM 
     df_ideam=pd.read_excel(ideam_path,skiprows=6,header=1)
     if df_ideam.shape!=0:
-        print("Datos IDEAM cargados exitosamente.")
-        print("Dimensiones mediciones IDEAM: ", df_ideam.shape)
+        print("IDEAM data loades succesfully.")
+        print("IDEAM data dimensions: ", df_ideam.shape)
     else:
-        print("Error al cargar las mediciones IDEAM.")
+        print("An error has ocurred while loading IDEAM data. Check your path!.")
         return
-    
-    # Correct format
-    print("Columnas originales: ", df_ideam.columns.tolist())
     
     # Drop unnecesary columns
     df_ideam=df_ideam.drop(["Unnamed: 1", "Unnamed: 3", "Unnamed: 5"],axis=1)
@@ -98,12 +93,12 @@ def process_IDEAM_data(ideam_path:str, **kwargs) -> pd.DataFrame:
 
     # Show the result
     print("\nIDEAM data")
-    print("Columnas actules: ", df_ideam.columns.tolist())
-    print("Dimensiones IDEAM: ", df_ideam.shape)
-    print("Primeros cinco registros: ")
+    print("Current columns: ", df_ideam.columns.tolist())
+    print("Data dimensions: ", df_ideam.shape)
+    print("First five records: ")
     print(df_ideam.head())
     print("")
-    print("Tipos de las columnas: ")
+    print("Columns types: ")
     print(df_ideam.dtypes)
     
     return df_ideam
@@ -130,27 +125,26 @@ def process_APTO_data(apto_number:str) -> pd.DataFrame:
     """
     
     # Get apto path
-    apto_path=os.path.join(os.getcwd(), f"MEDICION APTO {apto_number} Senderos de Modelia.xlsx")
+    apto_path=os.path.join(os.getcwd(), f"XXXX_PROJECTXXXX_APTO{apto_number}.xlsx")
     current_path=os.getcwd()
     
     # Print the apto number, current working  directory and apto data path.
-    print("El apartamento a processar es: ", apto_number)
-    print("El directorio actual es: ", current_path)
-    print("La ruta del archivo es:", apto_path)
+    print("The aprtment to process is: ", apto_number)
+    print("The current working directory is: ", current_path)
+    print("The route of the files is: ", apto_path)
     
     # Read and load data
     # APTO
-    df_apto=pd.read_excel(apto_path,skiprows=3,header=1)
+    df_apto = pd.read_excel(apto_path,skiprows=3,header=1)
     if df_apto.shape!=0:
-        print(f"Datos del apartamento {apto_number} cargados exitosamente.")
-        print(f"Dimensiones de las mediciones del apartamneto {apto_number}: ", df_apto.shape)
+        print(f"Apartment {apto_number} data loaded succesfully.")
+        print(f"Data dimensions of apartment {apto_number}: ", df_apto.shape)
     else:
-        print(f"Error al cargar los datos del apartamento {apto_number}.")
-        return
+        print(f"An error has occurred while loadinf apartment {apto_number} data. Check your file name, "
+              "apartment number or your current working directory!")
     
     
     # Correct format
-    print("Columnas originales: ", df_apto.columns.tolist())
     # Drop unnecesarry columns
     df_apto=df_apto.drop(["Unnamed: 0", "No.", "Area"], axis=1)
     # Correct data types
@@ -177,96 +171,18 @@ def process_APTO_data(apto_number:str) -> pd.DataFrame:
                                       }) 
     
     # Show results
-    print(f"\nApartemento {apto_number} data")
-    print("Columnas actules: ", df_apto.columns.tolist())
-    print("Dimensiones apartamento: ", df_apto.shape)
-    print("Primeros cinco registros: ")
-    print(df_apto.head())
-    print("")
-    print("Tipos de las columnas: ")
-    print(df_apto.dtypes)
-    
-    return df_apto
-
-#%%
-
-# Function for extracting and processig apartment 4-1102 data, since it has a
-# different format that the other.
-
-def process_APTO1102_data(apto_number:str) -> pd.DataFrame:
-    """
-    Reads, loads, processes and saves selected apartment data into a pandas dataframe.
-    
-    Parameters
-    ----------
-    apto_number : str
-        Number of the aprtment to process that matches the one on xlsx file.
-
-    Returns
-    -------
-    df_apto : DataFrame
-        Dataframe containing the porcessed IDEAM data.
-
-    """
-    
-    # Get apto path
-    apto_path=os.path.join(os.getcwd(), f"MEDICION APTO {apto_number} Senderos de Modelia.xlsx")
-    current_path=os.getcwd()
-    
-    # Print the apto number, current working  directory and apto data path.
-    print("El apartamento a processar es: ", apto_number)
-    print("El directorio actual es: ", current_path)
-    print("La ruta del archivo es:", apto_path)
-    
-    # Read and load data
-    # APTO
-    df_apto=pd.read_excel(apto_path,header=0)
-    if df_apto.shape!=0:
-        print(f"Datos del apartamento {apto_number} cargados exitosamente.")
-        print(f"Dimensiones de las mediciones del apartamneto {apto_number}: ", df_apto.shape)
-    else:
-        print(f"Error al cargar los datos del apartamento {apto_number}.")
-        return
-    
-    
-    # Correct format
-    print("Columnas originales: ", df_apto.columns.tolist())
-    # Drop unnecesarry columns
-    df_apto=df_apto.drop(["No."], axis=1)
-    # Correct data types
-    df_apto["Date"]=df_apto["Date"].astype("str")
-    df_apto["Time"]=df_apto["Time"].astype("str")
-    print(df_apto["Time"].loc[0])
-    df_apto["Timestamp APTO"]=df_apto["Date"]+"  "+df_apto["Time"]
-    print(df_apto["Timestamp APTO"].loc[0])
-    df_apto["Timestamp APTO"]=pd.to_datetime(df_apto["Timestamp APTO"], dayfirst=True)
-    print(df_apto["Timestamp APTO"].loc[0])
-    print(type(df_apto["Timestamp APTO"].loc[0]))
-    df_apto["Date"]=df_apto["Timestamp APTO"].dt.date
-    df_apto["Month"]=df_apto["Timestamp APTO"].dt.month
-    df_apto["Day"]=df_apto["Timestamp APTO"].dt.day
-    df_apto["Time"]=df_apto["Timestamp APTO"].dt.time
-    df_apto["Hour"]=df_apto["Timestamp APTO"].dt.hour
-    # Extract, reorganize, and rename columns
-    df_apto=df_apto[["Timestamp APTO", "Date","Month","Day","Time","Hour","Temperature T [Â°C]","Relative Humidity RH [%]","Dew Point DP [Â°C]"]]
-    df_apto=df_apto.rename(columns={"Date": "Date APTO",
-                                    "Time":"Time APTO",
-                                    "Temperature T [Â°C]": "Temperature [°C] APTO",
-                                    "Relative Humidity RH [%]":"Relative humidity [%] APTO",
-                                    "Dew Point DP [Â°C]":"Dew point [°C] APTO"
-                                      }) 
-    
     # Show results
-    print(f"\nApartemento {apto_number} data")
-    print("Columnas actules: ", df_apto.columns.tolist())
-    print("Dimensiones apartamento: ", df_apto.shape)
-    print("Primeros cinco registros: ")
+    print(f"\nApartement {apto_number} data")
+    print("Current columns: ", df_apto.columns.tolist())
+    print("Data dimensions: ", df_apto.shape)
+    print("First five records: ")
     print(df_apto.head())
     print("")
-    print("Tipos de las columnas: ")
+    print("Colums types: ")
     print(df_apto.dtypes)
     
     return df_apto
+
 
 #%%
 
@@ -295,33 +211,31 @@ def merge_IDEAM_APTO_data(df_apto:pd.DataFrame, df_ideam:pd.DataFrame, merged_pa
     
     # Merge the data with a inner join-
     df_merged=df_apto.merge(df_ideam, on=["Month","Day","Hour"], how="inner")
-    
-    # Timestamp for graph changing apto year in stamtime
-    #df_merged["Graph Timestamp APTO"]=df_merged["Timestamp APTO"].str.replace("2024")
+
     
     # Reorgonize
-    df_merged=df_merged[["Timestamp IDEAM","Timestamp APTO","Date IDEAM","Date APTO","Month","Day","Hour","Time IDEAM","Time APTO","Relative humidity [%] IDEAM","Relative humidity [%] APTO","Temperature [°C] APTO","Dew point [°C] APTO"]]
+    df_merged=df_merged[["Timestamp IDEAM","Timestamp APTO","Date IDEAM","Date APTO","Month","Day","Hour","Time IDEAM","Time APTO",
+                         "Relative humidity [%] IDEAM","Relative humidity [%] APTO","Temperature [°C] APTO","Dew point [°C] APTO"]]
 
     # Error if dimensions are nor consistent
     if df_merged.shape[0]!=df_apto.shape[0]:
-        print("Error al unir los registros.")
+        print("An error has ocurred while triying to join the records. Check your data!")
         return
     
     # Show results
     print("Merged data")
-    print("Columnas actules: ", df_merged.columns.tolist())
-    print("Dimensiones merged: ", df_merged.shape)  
-    print("Primeros cinco registros: ")
+    print("Current columns: ", df_merged.columns.tolist())
+    print("Data dimensions: ", df_merged.shape)  
+    print("First five records ")
     print(df_merged.head())
     print("")
-    print("Tipos de las columnas: ")
+    print("Columns types: ")
     print(df_merged.dtypes)
     
     # Save data
     df_merged.to_excel(merged_path)
     
     return df_merged
-
 #%%
 
 # Function for graph
@@ -407,89 +321,33 @@ def make_humidity_graph(df_merged: pd.DataFrame, apto_number:str, **kwargs)->Non
 #%%
 
 # Main
-
-# IDEAM data
-ideam_path=os.path.join(os.getcwd(), "Mediciones_IDEAM.xlsx")
-df_ideam=process_IDEAM_data(ideam_path)
-
-# Apartments numbers
-aptos=["4-501","4-902","5-102"]
-
-# Merge the data
-dfs_aptos=[]
-dfs_merged=[]
-for apto in aptos:
-    df_apto=process_APTO_data(apto)
-    dfs_aptos.append(df_apto)
-    merged_path=os.path.join(os.getcwd(),"Merged_Data",f"Merged_{apto}.xlsx")
-    df_merged=merge_IDEAM_APTO_data(df_apto, df_ideam, merged_path)
-    dfs_merged.append(df_merged)
+def main():
+    # IDEAM data
+    ideam_path=os.path.join(os.getcwd(), "Mediciones_IDEAM.xlsx")
+    df_ideam=process_IDEAM_data(ideam_path)
     
-
-#%%
-
-# Plots
-make_humidity_graph(dfs_merged[0], aptos[0], [20215, 20223.999], 1.3)
-make_humidity_graph(dfs_merged[1], aptos[1], [20229.999999, 20232.99999], 4)
-make_humidity_graph(dfs_merged[2], aptos[2], [20222.99, 20228.95], 2)
-make_humidity_graph(dfs_merged[3], aptos[3], [20252, 20254.998], 3.9)
-make_humidity_graph(dfs_merged[4], aptos[4], [20258.365486111114, 20258.970486111113], 7)
-
-
-#%%
-
-# Proccess apartment 4-1102
-
-apto_1102="4-1102"
-df_apto_1102=process_APTO1102_data(apto_1102)
-merged_path_1102=os.path.join(os.getcwd(),"Merged_Data",f"Merged_{apto_1102}.xlsx")
-df_merged_1102=merge_IDEAM_APTO_data(df_apto_1102, df_ideam, merged_path_1102)
-make_humidity_graph(df_merged_1102,apto_1102,[20174.999999999999, 20183],1.4)
-
-
-#%%
-
-# Append aparment 4-1102
-aptos.append(apto_1102)
-dfs_aptos.append(df_apto_1102)
-dfs_merged.append(df_merged_1102)
-
-
-#%%
-
-# Process apartment 7-102
-# IDEAM data 2024
-ideam_path_2024=os.path.join(os.getcwd(), "Mediciones_IDEAM.xlsx")
-df_ideam_2024=process_IDEAM_data(ideam_path_2024)
-#%%
-
-print(df_ideam_2024.head())
-
-#%%
-apto_7102="7-102"
-df_7102=process_APTO_data(apto_7102)
-print(df_ideam_2024.shape)
-print(df_7102.shape)
-
-#%%
-merged_path_7102=os.path.join(os.getcwd(),"Merged_Data",f"Merged_{apto_7102}.xlsx")
-df_merged_7102=merge_IDEAM_APTO_data(df_7102, df_ideam_2024, merged_path_7102)
+    # Apartments numbers
+    aptos=["4-501","4-902","5-102"]
     
+    # Merge the data
+    dfs_aptos=[]
+    dfs_merged=[]
+    for apto in aptos:
+        df_apto=process_APTO_data(apto)
+        dfs_aptos.append(df_apto)
+        merged_path=os.path.join(os.getcwd(),"Merged_Data_Relative_Humidity", f"Merged_{apto}_RH.xlsx")
+        df_merged=merge_IDEAM_APTO_data(df_apto, df_ideam, merged_path)
+        dfs_merged.append(df_merged)
+        make_humidity_graph(dfs_merged, apto)
+
+
+
 #%%
-df_merged_7102["Timestamp IDEAM"]=df_merged_7102["Timestamp IDEAM"].astype("str")
-df_merged_7102["Timestamp IDEAM"]=df_merged_7102["Timestamp IDEAM"].str.replace("2024","2025")
-df_merged_7102["Timestamp IDEAM"]=pd.to_datetime(df_merged_7102["Timestamp IDEAM"])
-print(df_merged_7102.dtypes)
+
+if __name__ == '__main__':
+    main()
 
 
-make_humidity_graph(df_merged_7102, "7-102", [20252, 20254.99999999999], 3.9)
 
-#(20258.365486111114, 20258.970486111113)
-
-
-#%%
-
-print("Hello world!")
-print("Oscar Daniel")
 
 
