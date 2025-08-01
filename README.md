@@ -1,4 +1,4 @@
-# DA_Temperature_and_Relative_Humidity_for_Apartment_Meditions
+# DA_Temperature_and_Relative_Humidity_for_Apartment_Readings
 # Description
 Reads, cleans and process relative humidity and temperature data for a set of apartments, 
 and matches the data with data from goverment agencies. Finally, produces graphs for 
