@@ -1,4 +1,14 @@
 # DA_Temperature_and_Relative_Humidity_for_Apartment_Meditions
-Reads, cleans and porcess relative humidity and temperature data for a set of apartments, 
+# Description
+Reads, cleans and process relative humidity and temperature data for a set of apartments, 
 and matches the data with meditions from goverment agencies. Finally, produces graphs for 
-each of them as well as graph containing all the data.
+each of them as well as graph containing all the data. 
+
+This repository does not include the databases nor the sources of them. While I would like 
+to share the complete project, it involves sensible data that I am
+not allowed to share. However, with the adducate permission,I have included two result 
+graphs as an example.
+
+# Lbraries used
+Pandas, Numpy and Matplolib
+
