@@ -9,6 +9,4 @@ to share the complete project, it involves sensible data that I am
 not allowed to share. However, with the adequate permission, I have included two results 
 graphs as an example.
 
-# Lbraries used
-Pandas, Numpy and Matplolib
 
